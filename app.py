@@ -10,7 +10,7 @@ import psycopg2
 from db import db
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:vaizaado154@localhost/RESTUdemy'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' #'postgresql://postgres:vaizaado154@localhost/RESTUdemy'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'musawi'
 api = Api(app)
