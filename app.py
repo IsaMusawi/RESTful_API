@@ -1,4 +1,5 @@
 import os
+import re
 
 from flask import Flask
 from flask_restful import Api
@@ -12,7 +13,12 @@ import psycopg2
 from db import db
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db') #'postgresql://postgres:vaizaado154@localhost/RESTUdemy'
+
+uri = os.getenv("DATABASE_URL")
+if uri.startswith("postgres://"):
+    uri.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(uri, 'sqlite:///data.db') #'postgresql://postgres:vaizaado154@localhost/RESTUdemy'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'musawi'
 api = Api(app)
